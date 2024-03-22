@@ -20,8 +20,13 @@ function ListGroup({ heading, items, emoji, filterState, setFilterState }) {
                 : "list-group-item"
             }
             onClick={() => {
-              setFilterState(item);
-              setSelectedIndex(index);
+              if (selectedIndex == index) {
+                setFilterState(null);
+                setSelectedIndex(-1);
+              } else {
+                setFilterState(item);
+                setSelectedIndex(index);
+              }
               console.log(index, selectedIndex, item, filterState);
             }}
             key={item}

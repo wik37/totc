@@ -4,7 +4,7 @@ import GrocerFilter from "../components/GroceryFilter";
 import React, { useState } from "react";
 
 export default function Market() {
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState(null);
   let categories = ["Fruit", "Vegetables", "Baked Goods", "Meats", "Dairy"];
   return (
     <>
@@ -18,6 +18,7 @@ export default function Market() {
               filterState={filter}
               setFilterState={setFilter}
             />
+            <div class="vr"></div>
           </div>
           <div className="col col-sm-10">
             <div className="row row-cols-4">

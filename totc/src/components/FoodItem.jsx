@@ -61,7 +61,7 @@ export default function FoodItem({ filter }) {
   return (
     <>
       {foods.map((food) =>
-        food.category == filter ? (
+        food.category == filter || filter == null ? (
           <div className="col" key={food.foodName}>
             <FoodItemCard
               foodName={food.foodName}
