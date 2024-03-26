@@ -5,6 +5,7 @@ import Market from "./pages/Market";
 import Menu from "./pages/Menu";
 import { Route, Routes } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import React, { useEffect } from "react";
 
 const POSTS = [
   { id: 1, title: "Post 1" },
@@ -34,6 +35,13 @@ function App() {
   if (postsQuery.isError) {
     return <pre>{JSON.stringify(postsQuery.error)}</pre>;
   }
+
+  useEffect(() => {
+    fetch("http://localhost:8081/posts")
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div>
