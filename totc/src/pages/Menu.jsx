@@ -7,7 +7,6 @@ export default function Menu() {
   let categories = ["Appetizers", "Lunch", "Fish", "Entree", "Dessert"];
   return (
     <>
-      <h1>Menu</h1>
       <div className="container">
         <div className="row">
           <div className="col col-sm-2">

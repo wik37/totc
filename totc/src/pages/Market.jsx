@@ -1,14 +1,23 @@
 import ListGroup from "../components/ListGroup";
-import FoodItem from "../components/FoodItem";
-import GrocerFilter from "../components/GroceryFilter";
-import React, { useState } from "react";
+import FoodItemCard from "../components/FoodItemCard";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getItems } from "../api/items";
 
 export default function Market() {
   const [filter, setFilter] = useState(null);
-  let categories = ["Fruit", "Vegetables", "Baked Goods", "Meats", "Dairy"];
+  let categories = ["Fruit", "Vegetable", "Baked Goods", "Meats", "Dairy"];
+
+  const { data: items, error } = useQuery({
+    queryKey: ["items"],
+    queryFn: () => getItems(),
+  });
+
+  console.log(items);
+  //console.log(items.category);
+  //<FoodItem filter={filter} />
   return (
     <>
-      <h1>Market</h1>
       <div className="container">
         <div className="row">
           <div className="col col-sm-2">
@@ -22,7 +31,18 @@ export default function Market() {
           </div>
           <div className="col col-sm-10">
             <div className="row row-cols-4">
-              <FoodItem filter={filter} />
+              {items?.map((item) =>
+                item.category.toLowerCase() == filter || filter == null ? (
+                  <FoodItemCard
+                    foodName={item.itemName}
+                    price={item.price}
+                    category={item.category}
+                    filter={filter}
+                  />
+                ) : (
+                  ""
+                )
+              )}
             </div>
           </div>
         </div>
