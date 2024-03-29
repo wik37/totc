@@ -24,6 +24,13 @@ app.get('/totc', (req, res)=> {
     })
 })
 
+app.get('/totc/category', (req, res)=> {
+    const sql = "SELECT DISTINCT category FROM item";
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
 app.listen(8081, ()=> {
     console.log("listening");
     

@@ -6,14 +6,21 @@ import { getItems } from "../api/items";
 
 export default function Market() {
   const [filter, setFilter] = useState(null);
-  let categories = ["Fruit", "Vegetable", "Baked Goods", "Meats", "Dairy"];
+  let oldcategories = ["Fruit", "Vegetable", "Baked Goods", "Meats", "Dairy"];
 
-  const { data: items, error } = useQuery({
+  const { data: items, itemsError } = useQuery({
     queryKey: ["items"],
     queryFn: () => getItems(),
   });
 
+  const { data: categories, catsError } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => getCategories(),
+  });
+
   console.log(items);
+  console.log({ categories });
+  console.log(oldcategories);
   //console.log(items.category);
   //<FoodItem filter={filter} />
   return (
@@ -23,7 +30,7 @@ export default function Market() {
           <div className="col col-sm-2">
             <ListGroup
               heading="Categories"
-              items={categories}
+              items={oldcategories}
               filterState={filter}
               setFilterState={setFilter}
             />
